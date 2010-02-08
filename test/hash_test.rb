@@ -50,7 +50,8 @@ class CrackTest < Test::Unit::TestCase
     end
 
     should 'should URL encode unsafe characters' do
-      {:q => "?&\" +"}.to_params.should == "q=%3F%26%22%20%2B"
+      # both %20 or + should be okay
+      {:q => "?&\" +"}.to_params.should =~ /^q=%3F%26%22(\+|%20)%2B$/
     end
   end
 end
